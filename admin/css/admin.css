@@ -1,0 +1,135 @@
+html * {
+    font-size: 12pt;
+}
+
+.config-part {
+    width: 47%;
+    float: left;
+    border: 1px solid #eeeeee;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.config-part.right {
+    margin-left: 5%;
+}
+
+.config-part.whole {
+    width: 95%;
+}
+
+.config-part > h3 {
+    background-color: #eeeeff;
+    border: 1px solid #aaaadd;
+    padding: 0.5em 1em;
+    margin:0;
+    font-size: 1em;
+}
+
+.config-part > div {
+    padding-left: 1em;
+    min-height: 100px;
+}
+
+.config-part.left {
+    clear: left;
+}
+
+table {
+    border-spacing: 0;
+    border-collapse:collapse;
+}
+
+table th,
+table td {
+    border: 1px solid #cccccc;
+    margin: 0;
+    padding: 5px;
+}
+
+table th {
+    background: rgb(57, 129, 161);
+    color: white;
+}
+
+.error {
+    color: #780c0f;
+    background: rgb(255, 223, 227);
+}
+
+.notice {
+    color: #004d00;
+    background: #e3f7e3;
+}
+
+div.proof {
+    background-color: #f5f5f5;
+    height: 250px;
+    overflow-y: scroll;
+    font-size: 10pt;
+
+}
+
+div.proof * {
+    font-size: 10pt;
+}
+
+.proof-link {
+    background-color: #e8e8e8;
+    font-size: 10pt;
+    display: block;
+    border-bottom: #9c9c9c;
+    line-height: 20pt;
+}
+
+.proof-link button {
+    float: right;
+    font-size: 9pt;
+}
+
+section > .buttons {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+
+}
+
+.buttons.done {
+    background-color: #008000;
+    color: white ;
+}
+
+.buttons.error {
+    background-color: #8b0000;
+    color: white ;
+}
+
+.buttons button {
+    font-size: 10pt;
+    border-color: black;
+}
+
+.config-part.done > div {
+    opacity: 0.3;
+}
+
+.config-part.done > h3 {
+    background-color: #cccccc;
+    color: #888888;
+    font-size: 11pt;
+}
+
+button.invalid,
+button.contact
+{
+    margin-left: -6px;
+    font-size: 9pt;
+
+    border-left: none;
+}
+
+strong.phone {
+    font-weight: inherit;
+    background-color: black;
+    color: white;
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: tahoma, Arial, sans-serif;
+            font-size: 13px;
+        }
+
+        body * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        #mnezvonil-info {
+            width: 100%;
+            padding: 0;
+            border: 1px solid #cccccc;
+
+        }
+
+        #mnezvonil-info-field {
+            font-family: tahoma, Arial, sans-serif;
+            font-size: 16px;
+            width: 100%;
+            border: none;
+            padding-left: 4px;
+            height: 20px;
+        }
+
+        #mnezvonil-info-information {
+            background-color: #d4d4d4;
+            height: 35px;
+            text-align: center;
+            line-height: 35px;
+        }
+
+        #mnezvonil-info-information.error {
+            background-color: #a9655a;
+        }
+
+        #mnezvonil-info-information.found {
+            background-color: #ff958c;
+            line-height: normal;
+        }
+
+        #mnezvonil-info-information.ok {
+            background-color: #bdffc5;
+        }
+
+    </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="widget.js"></script>
+</head>
+<body>
+<form target="_top" action="/" method="GET">
+    <div id="mnezvonil-info">
+        <input type="text" id="mnezvonil-info-field" placeholder="Проверка телефона в ЧС"/>
+        <div id="mnezvonil-info-information">
+            Введите номер телефона для проверки
+        </div>
+    </div>
+</form>
+</body>
+</html>

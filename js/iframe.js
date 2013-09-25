@@ -1,0 +1,1 @@
+document.write("<iframe src='http://mnezvonil.info/js/widget.html?from=" + encodeURIComponent(document.location.href) + "' class='--mzi-widget-frame' width='250px' height='56px' style='border: 0' scrolling='no'></iframe> ");
