@@ -10,7 +10,7 @@ class PesikotCollector extends ForumCollector {
      * @return String
      */
     protected function get_next_page_selector() {
-        return ".switchNext";
+        return ".pagelink a:contains('>')";
     }
 
     /**

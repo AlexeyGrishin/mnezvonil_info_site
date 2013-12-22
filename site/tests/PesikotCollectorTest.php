@@ -11,7 +11,9 @@ class TempFw implements CollectorFW {
     }
 
     function store($collectedPhoneInfo) {
-        print_r($collectedPhoneInfo);
+        foreach ($collectedPhoneInfo as $c) {
+            print_r($c->get_url() . " --> " . $c->get_phone() . "\n");
+        }
     }
 
     function storePost($post_url) {
