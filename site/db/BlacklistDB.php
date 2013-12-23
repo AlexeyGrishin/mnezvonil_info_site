@@ -229,7 +229,7 @@ class BlacklistDB {
     }
 
     function listNonReviewedPhones($count = 101) {
-        $phones = $this->helper->get_list("phones p", "id", "reviewed = 0 and exists (select id from phone_proofs pp where pp.phone_id = p.id and pp.removed = 0)LIMIT $count");
+        $phones = $this->helper->get_list("phones p", "id", "reviewed = 0 and exists (select id from phone_proofs pp where pp.phone_id = p.id and pp.removed = 0) ORDER BY p.id DESC LIMIT $count");
         $proofs_per_phone = array();
         if (count($phones) > 0) {
             $proofs = $this->helper->get_list_objects("phone_proofs", "PhoneProofDB", "phone_id in (" . join(", ", $phones) . ") and removed = 0");
