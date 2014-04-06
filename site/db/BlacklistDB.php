@@ -228,8 +228,14 @@ class BlacklistDB {
         $this->mysql->exec("delete from phones where not id in (select phone_id from phone_proofs pp)");
     }
 
-    function listNonReviewedPhones($count = 101) {
-        $phones = $this->helper->get_list("phones p", "id", "reviewed = 0 and exists (select id from phone_proofs pp where pp.phone_id = p.id and pp.removed = 0) ORDER BY p.id DESC LIMIT $count");
+    function listNonReviewedPhones($count = 101, $site_id = null) {
+        $site_cond = "";
+        $args = array();
+        if (isset($site_id)) {
+            $site_cond = " and known_site_id = :site_id ";
+            $args["site_id"] = $site_id;
+        }
+        $phones = $this->helper->get_list("phones p", "id", "reviewed = 0 and exists (select id from phone_proofs pp where pp.phone_id = p.id and pp.removed = 0 $site_cond) ORDER BY p.id DESC LIMIT $count", $args);
         $proofs_per_phone = array();
         if (count($phones) > 0) {
             $proofs = $this->helper->get_list_objects("phone_proofs", "PhoneProofDB", "phone_id in (" . join(", ", $phones) . ") and removed = 0");

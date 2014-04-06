@@ -90,14 +90,16 @@ class Dispatcher {
         }
         catch (Exception $e) {
             $this->logger->logError($e);
-            $this->on_error($e, false);
+            $err = $this->on_error($e, false);
+            $this->templator->set("dev", Site::is_development());
+            $this->templator->set("error", $err);
             return $this->templator->render("error", null);
         }
 
     }
 
     protected function on_error(Exception $e, $is_ajax) {
-
+        return $e;
     }
 }
 
@@ -179,6 +181,7 @@ class BLDispatcher extends Dispatcher {
         $body = $body . "\n\nSERVER: " . "\n";
         $body = $body . var_export($_SERVER, true);
         MailLogger::send("Unexpected error occurred on site", $body);
+        return $body;
     }
 
 
@@ -191,6 +194,8 @@ try {
 }
 catch (Exception $e) {
     $d->logger->logError($e);
-    $d->on_error($e, false);
+    $err = $d->on_error($e, false);
+    $d->templator->set("dev", Site::is_development());
+    $d->templator->set("error", $err);
     echo($d->templator->render("error", null));
 }

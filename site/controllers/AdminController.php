@@ -83,7 +83,9 @@ class AdminController extends Controller{
             array(
                 "phones_count" => $this->db->getNonReviewedPhonesCount(),
                 "phones_without_proofs" => $this->db->getPhonesCountWithoutProofs(),
-                "logs" => $logs));
+                "logs" => $logs,
+                "sites" => $sites
+            ));
     }
 
     function delete_without_proofs() {
@@ -93,7 +95,7 @@ class AdminController extends Controller{
 
     function phones() {
         $max = 31;
-        $proofs_per_phone = $this->db->listNonReviewedPhones($max);
+        $proofs_per_phone = $this->db->listNonReviewedPhones($max, $this->site_id);
         if (count($proofs_per_phone) == $max) {
             $has_more = true;
             array_pop($proofs_per_phone);

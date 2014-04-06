@@ -16,6 +16,11 @@
         <span>Нет непроверенных телефонов</span>
         <?php } else { ?>
         <a href="<?php e(Site::$admin_phones);?>">Непроверенных телефонов - <?php e($phones_count);?></a>
+        <ul>
+            <?php foreach ($sites as $site) { ?>
+                <li><a href="<?php e(Site::$admin_phones . $site->id) ?>"><?php e($site->domain) ?></a></li>
+            <?php } ?>
+        </ul>
         <?php } ?>
     </div>
     <?php if ($phones_without_proofs > 0) {?>
