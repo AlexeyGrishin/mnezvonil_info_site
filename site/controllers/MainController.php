@@ -45,13 +45,67 @@ class MainController extends Controller {
         }
     }
 
+    function distribute($pi, Cities $cities) {
+        $ret = array();
+        if (is_cell($pi->id)) {
+            $ret[] = array("scope" => "mobile", "info" => array($pi), "phone" => $pi->id);
+        }
+        else if (is_full($pi->id)) {
+            $city_phone = get_local_phone($pi->id);
+            $city_code = get_city_code($pi->id);
+            $city = $cities->perCode($city_code);
+            $ret[] = array("scope" => $city->title, "info" => array($pi), "code" => $city_code, "phone" => $city_phone);
+        }
+        else {
+            $city_phone = get_local_phone($pi->id);
+            $per_city = array();
+            $proofs = $pi->proofs();
+            foreach ($proofs as $proof) {
+                $city_code = get_city_code($proof->phone_id);
+                $city = $cities->perCode($city_code);
+                if (!array_key_exists($city->title, $per_city)) {
+                    $per_city[$city->title] = array(
+                        "scope" => $city->title,
+                        "phone" => $city_phone,
+                        "code" => $city_code,
+                        "info" => array()
+                    );
+                }
+                $per_city[$city->title]["info"][] = $proof;
+            }
+            $all_cities = $cities->all();
+            $NOTHING = "n/a";
+            foreach ($all_cities as $city) {
+                if (!array_key_exists($city->title, $per_city)) {
+                    $ret[] = array(
+                        "scope" => $city->title,
+                        "phone" => $city_phone,
+                        "code" => $city->phone_code,
+                        "info" => array()
+                    );
+                    $per_city[$city->title] = $NOTHING;
+                }
+            }
+            foreach ($per_city as $city => $result) {
+                if ($result != $NOTHING) {
+                    $ret[] = $result;
+                }
+            }
+        }
+        foreach ($ret as $info) {
+            $info["result"] = I18N::result(count($info["info"]));
+        }
+        return $ret;
+    }
+
     function phone() {
         $pi = $this->db->findPhoneInfo(unsearch(urldecode($this->phone)));
         if ($pi) {
             return $this->render("result", array("original" => urldecode($this->phone),
                 "pi" => $pi,
                 "result" => I18N::result(count($pi->proofs())),
-                "phone" => $this->render_phone($pi->id)
+                "phone" => $this->render_phone($pi->id),
+                "grouped" => $this->distribute($pi, $this->db->getCities())
             ), "layout");
         }
         else {

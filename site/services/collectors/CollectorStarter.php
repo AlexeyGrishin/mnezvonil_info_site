@@ -34,7 +34,7 @@ class CollectorStarter {
             $internal = $site->internal;
             include_once dirname(__FILE__)."/".$internal."/package.php";
             $collector = call_user_func($internal."_produce_collector", $this->db);
-            $fw = new KnownSiteRelatedFW($this, $site->id, $clog);
+            $fw = new KnownSiteRelatedFW($this, $site, $clog);
             $this->addCollector($collector, $fw);
             $clog->on_end();
             $this->db->storeLog($clog);
@@ -84,9 +84,10 @@ class CollectorStarter {
 
 
 class KnownSiteRelatedFW implements CollectorFW {
-    function __construct(CollectorStarter $starter, $site_id, CollectionLog $clog) {
+    function __construct(CollectorStarter $starter, KnownSiteDB $site, CollectionLog $clog) {
         $this->starter = $starter;
-        $this->site_id = $site_id;
+        $this->site_id = $site->id;
+        $this->city_code = $site->default_city_id;
         $this->purifier = new HTMLPurifier();
         $this->clog = $clog;
     }
@@ -101,6 +102,7 @@ class KnownSiteRelatedFW implements CollectorFW {
         $prev_text = "";
         $prev_text_id = -1;
         foreach ($collectedPhoneInfo as $c) {
+            $c->ensureCityCode($this->city_code);
             try {
                 if (!$this->starter->db->hasPhoneInfo($c->get_phone(), $c->get_url(), $this->site_id)) {
                     $text_id = $c->get_text_id();

@@ -2,6 +2,7 @@
 
 require_once dirname(__FILE__).'/../services/libs/KLogger.php';
 require_once dirname(__FILE__).'/KnownSiteDB.php';
+require_once dirname(__FILE__).'/CityDB.php';
 require_once dirname(__FILE__).'/PhoneInfoDB.php';
 require_once dirname(__FILE__).'/PhoneProofDB.php';
 require_once dirname(__FILE__).'/CollectionLog.php';
@@ -30,6 +31,10 @@ class BlacklistDB {
             $resArray[] = $ros;
         }
         return $resArray;
+    }
+
+    function getCities() {
+        return new Cities($this->helper->get_list_objects("cities", "CityDB"));
     }
 
     function getKnownSitesEvenInactive() {

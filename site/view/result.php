@@ -1,6 +1,9 @@
 <?php $class="found"; ?>
 <?php Templator::capture("body") ?>
 
+<pre>
+<?php e(print_r($grouped, true));?>
+</pre>
 <?php
     $proofs = $pi->proofs();
     foreach ($proofs as $proof) {

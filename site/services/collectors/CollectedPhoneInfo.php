@@ -21,6 +21,12 @@ class CollectedPhoneInfo {
         $this->sure = $sure;
     }
 
+    function ensureCityCode($city_code) {
+        if (is_local($this->phone)) {
+            $this->phone = $city_code . $this->phone;
+        }
+    }
+
     function get_phone() {return $this->phone;}
     function get_url() {return $this->url;}
     function get_post_id() {return $this->post_id;}

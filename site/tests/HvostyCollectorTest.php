@@ -12,6 +12,9 @@ class TempFw implements CollectorFW {
     }
 
     function store($collectedPhoneInfo) {
+        foreach ($collectedPhoneInfo as $c) {
+            $c->ensureCityCode(812);
+        }
         print_r($collectedPhoneInfo);
     }
 
@@ -39,5 +42,5 @@ if (ini_get("date.timezone") == FALSE) {
     date_default_timezone_set("Europe/Moscow");
 }
 $hc = new HvostyCollector(new VseHvosty());
-$hc = new PostCollector("http://vsehvosty.ru/forum/viewtopic.php?f=15&t=80584&sid=91d49490dcd9347a8b97a9c01b66aba0", 1, $hc->logger, new VseHvosty());
+$hc = new PostCollector("http://vsehvosty.ru/forum/viewtopic.php?f=15&t=98777", 1, $hc->logger, new VseHvosty());
 $hc->do_collect(new TempFw());

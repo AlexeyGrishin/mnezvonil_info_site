@@ -9,6 +9,7 @@ class KnownSiteDB {
     public $update_period_hours;
     public $collect_period_hours;
     public $last_collected;
+    public $default_city_id;
 
     function __construct() {
         $this->last_collected_date = strtotime($this->last_collected);

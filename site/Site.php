@@ -7,7 +7,7 @@ include_once dirname(__FILE__)."/Mode.php";
 
 class Site {
 
-    static $base = "/blacklist/";
+    static $base = "/";///blacklist/";
     static $mail_contact = "info@mnezvonil.info";
     static $mail_delete = "info@mnezvonil.info";
     static $mail_real = "info@mnezvonil.info";
@@ -43,6 +43,7 @@ class Site {
         }
         if (MODE == "production") {
             //here goes production credentials
+            include_once dirname(__FILE__)."/Production.php";
         }
     }
 

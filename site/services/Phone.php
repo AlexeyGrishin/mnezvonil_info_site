@@ -78,9 +78,6 @@ function unsearch($phone) {
         $digit_phone = substr($digit_phone, 1);
         $phones[] = $digit_phone;
     }
-    if (is_full($digit_phone) && !is_cell($digit_phone)) {
-        $phones[] = get_local_phone($digit_phone);
-    }
     if (strlen($digit_phone) < 8) {
         //partial phone, last numbers
         $phones[] = "*".$digit_phone;
