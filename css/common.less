@@ -1,31 +1,43 @@
+@import "consts";
+
 html {
   font-family: "segoe ui", open_sansregular, sans-serif;
-  font-size: 13pt;
+  font-size: @font_normal;
   color: black;
 }
-input,
-button {
+
+input, button {
   font-family: "segoe ui", open_sansregular, sans-serif;
 }
+
 body {
   padding: 0 100px;
-  margin: 0;
+  margin: 0
 }
+
 .main {
   margin-left: auto;
   margin-right: auto;
   min-width: 600px;
   max-width: 1000px;
 }
-.question h3 {
-  font-family: "segoe ui light", open_sanslight;
-  font-size: 16pt;
+
+
+.question {
+  h3 {
+    font-family: "segoe ui light", open_sanslight;
+    font-size: @font_big
+  }
+
+  div {
+    padding-left: 4em;
+    color: #666;
+    border-left: 2px dotted #ccc;
+  }
 }
-.question div {
-  padding-left: 4em;
-  color: #666;
-  border-left: 2px dotted #ccc;
-}
+
+
+
 footer {
   margin-top: 20px;
   border-top: 2px dotted #ccc;

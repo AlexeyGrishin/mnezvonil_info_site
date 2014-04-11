@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"><head>
     <title>Единый черный список для владельцев собак</title>
     <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="css/fonts.css" type="text/css" media="all">
     <link rel="stylesheet" href="css/common.css" type="text/css" media="all">
     <link rel="stylesheet" href="css/main.css" type="text/css" media="all">
     <script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
@@ -24,31 +25,44 @@
         <form method="GET" action="search">
             <div class="field">
                 <span>+7</span>
-                <input name="phone" type="text" maxlength="20"/>
+                <input name="phone" type="text" placeholder="-номер-телефона"/>
             </div>
             <input type="submit" value="Найти">
         </form>
+    </section>
+    <section class="sites">
+        <div>Поиск ведется по сайтам
+            <ul>
+                <?php foreach ($sites as $site) { ?>
+                    <li><strong><a href="http://<?php h($site->domain) ?>"><?php h($site->domain)?></a></strong> <em><?php h($site->info)?></em></li>
+                <?php }?>
+            </ul>
+        </div>
     </section>
 
 </section>
 
 <section class="questions">
 
-    <div class="question left">
-        <h3>Зачем нужен этот сайт?</h3>
+    <div class="question">
+        <h3>Как добавить телефонный номер в этот список?</h3>
         <div>
-            Этот сайт позволяет искать упоминания телефонных номеров в черных списках таких ресурсах, как:
-            <ul>
-                <?php foreach ($sites as $site) { ?>
-                <li><strong><?php h($site->domain)?></strong> &mdash; <?php h($site->info)?></li>
-                <?php }?>
-            </ul>
-            Если вы доверяете информации от людей, которые являются участниками этих ресурсов, то вы можете воспользоваться этим сайтом
-            для поиска телефонов мошенников либо недобросовестных хозяев.
+            <strong>Никак.</strong>
+            <br/>Данный сайт не содержит собственно списка телефонов, он только упрощает поиск по некоторым сайтам, где может быть опубликована жалоба.
+            Вы можете зарегистрироваться на этих сайтах и разместить свою жалобу в соответствующей теме. Если модераторы пропустят ваше сообщение, то оно вскоре будет доступно и здесь.
         </div>
     </div>
 
-    <div class="question right">
+    <div class="question">
+        <h3>Как убрать телефонный номер из этого списка?</h3>
+        <div>
+            Телефоны собираются автоматически с указанных сайтов. Данный сайт ничем не отличается от поисковых систем Google и Yandex и показывает только то, что есть на других сайтах.
+            <br/>
+            Поэтому вам нужно связать с администрацией сайта, на котором упомянут ваш телефон - ссылка на него всегда есть в результатах поиска.
+        </div>
+    </div>
+
+    <div class="question">
         <h3>Кого можно найти в этом черном списке?</h3>
         <div>
             В основном следующие категории граждан:
@@ -65,50 +79,31 @@
     </div>
 
 
-    <div class="question left">
-        <h3>Как добавить телефонный номер в этот список?</h3>
-        <div>
-            Никак. Данный сайт не содержит собственно списка телефонов, он только упрощает поиск по некоторым сайтам, где может быть опубликована жалоба.
-            Вы можете зарегистрироваться на этих сайтах и разместить свою жалобу в соответствующей теме. Если модераторы пропустят ваше сообщение, то оно вскоре будет доступно и здесь.
-        </div>
-    </div>
 
-    <div class="question right">
-        <h3>Как убрать телефонный номер из этого списка?</h3>
-        <div>
-            Телефоны собираются автоматически с указанных сайтов. Данный сайт ничем не отличается от поисковых систем Google и Yandex и показывает только то, что есть на других сайтах.
-            <br/>
-            Поэтому вам нужно связать с администрацией сайта, на котором упомянут ваш телефон - ссылка на него всегда есть в результатах поиска.
-        </div>
-    </div>
-
-    <div class="question left">
+    <div class="question">
         <h3>Как пополняется черный список?</h3>
         <div>Черный список пополняется автоматически с указанных сайтов, несколько раз в день.
             На текущий момент мы насчитали <a href="<?php e(Site::$list)?>"><?php e($total_count)?> телефонных номеров</a>
-            признанных мошенническими
-            <?php if ($non_reviewed > 0) {?>
-                , еще <?php e($non_reviewed);?> сейчас находятся в рассмотрении.
-                <?php } ?>
+            признанных мошенническими.
         </div>
     </div>
 
 
-    <div class="question right">
+    <div class="question">
         <h3>Можно ли задать вопрос/внести предложение?</h3>
         <div>
             Конечно. Напишите письмо на <?php m(Site::$mail_contact)?>, или ответьте в форме комментариев здесь внизу.
         </div>
     </div>
 
-    <div class="question left">
+    <div class="question">
         <h3>Можно ли встроить поиск по черному списку на другом сайте?</h3>
         <div>
             Конечно. Вы можете разместить на странице в нужном месте следующий html код:
             <pre>&lt;script src="http://mnezvonil.info/js/iframe.js">&lt;/script></pre>
             Результат будет выглядеть примерно вот так:
             <div class="example">
-                <script src="http://mnezvonil.info/js/iframe.js"></script>
+                <!--script src="http://mnezvonil.info/js/iframe.js"></script-->
             </div>
 
         </div>
@@ -134,7 +129,7 @@
 <br class="clear"/>
 
 <footer>
-    2012 - 2013
+    2012 - 2014
 </footer>
 
 </body>

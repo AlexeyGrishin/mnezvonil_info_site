@@ -1,90 +1,96 @@
-
-.main .find {
-    padding-bottom: 2em;
-    text-align: center;
-
+.top {
+  background: #F2F2F2;
+  padding: 1em;
 }
-
-.main .find .field {
-    font-size: 2em;
+.top > section {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
-
-.main .find input[type=submit] {
-    margin-top: 0.5em;
-    padding: 0.5em;
-    -webkit-border-radius: 16px; /* Saf3-4, iOS 1-3.2, Android ≤1.6 */
-       -moz-border-radius: 16px; /* FF1-3.6 */
-            border-radius: 16px; /* Opera 10.5, IE9, Saf5, Chrome, FF4, iOS 4, Android 2.1+ */
-
+.top h1 {
+  font-size: 16pt;
+  text-align: center;
 }
-
-.main .top-question ul {
-    max-width: 30em;
-    text-align: left;
-    margin-left: auto ;
-    margin-right: auto ;
-    padding: 0.5em;
-    background-color: #f2f2f2;
-
-    -webkit-border-radius: 12px; /* Saf3-4, iOS 1-3.2, Android ≤1.6 */
-       -moz-border-radius: 12px; /* FF1-3.6 */
-            border-radius: 12px; /* Opera 10.5, IE9, Saf5, Chrome, FF4, iOS 4, Android 2.1+ */
-
-    /* useful if you don't want a bg color from leaking outside the border: */
-    -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
-
-    list-style: none;
-    padding-left: 2em;
-
-
-    -webkit-box-shadow: 2px 2px 4px 0px #000; /* Saf3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-       -moz-box-shadow: 2px 2px 4px 0px #000; /* FF3.5 - 3.6 */
-            box-shadow: 2px 2px 4px 0px #000; /* Opera 10.5, IE9, FF4+, Chrome 6+, iOS 5 */
-
-
+.top .sites {
+  color: #737373;
+  margin-top: 10px;
 }
-
-.main .top-question ul li {
-    line-height: 2em;
+.top .sites li strong {
+  font-weight: normal;
+  display: inline-block;
+  width: 7em;
 }
-
-.main .example {
-    text-align: center;
-    padding-top: 15px;
+.top .sites li em {
+  font-size: 11pt;
+  padding-left: 2em;
+  font-style: normal;
 }
-
-
-#mc-container #mc-content {
-    padding-left: 0;
+.top form {
+  width: 100%;
+  font-size: 16pt;
+  height: 2em;
+  position: relative;
 }
-
-#mc-container #mc-content  .mc-openid-lable {
-    display: none;
+.top form .field {
+  position: absolute;
+  font-size: 16pt;
+  left: 0;
+  right: 140px;
+  top: 0;
+  bottom: 0;
+  border: 1px solid #A6A6A6;
+  background: white;
 }
-
-#mc-container {
-    padding-top: 2em;
+.top form .field > span {
+  position: absolute;
+  left: 3px;
+  top: 5px;
+  width: 32px;
+  bottom: 0;
 }
-
-#mc-container #mc-content {
-    position: relative;
+.top form .field > input {
+  font-size: 16pt;
+  width: 90%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  padding-left: 32px;
+  background: none;
+  outline: none;
 }
+.top form > input[type=submit] {
+  position: absolute;
+  font-size: 16pt;
+  right: 0;
+  width: 141px;
+  top: 0;
+  bottom: 0;
+  border: 1px solid #A6A6A6;
+  margin: 0;
+  color: white;
+  background-color: #000000;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#666666), to(#000000));
+  /* Saf4+, Chrome */
 
-#mc-content .mc-info-box {
-    margin-top: 1em;
+  background-image: -webkit-linear-gradient(top, #666666, #000000);
+  /* Chrome 10+, Saf5.1+, iOS 5+ */
+
+  background-image: -moz-linear-gradient(top, #666666, #000000);
+  /* FF3.6 */
+
+  background-image: linear-gradient(to bottom, #666666, #000000);
 }
-#mc-content #mc-comments {
-    margin-top: 3em;
-    background: #f8f8f8;
-    padding: 1em;
-    -webkit-box-shadow: 0px 0px 4px 0px #cccccc; /* Saf3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-       -moz-box-shadow: 0px 0px 4px 0px #cccccc; /* FF3.5 - 3.6 */
-            box-shadow: 0px 0px 4px 0px #cccccc; /* Opera 10.5, IE9, FF4+, Chrome 6+, iOS 5 */
-
+.top-question {
+  text-align: right;
+  font-size: 11pt;
+  font-family: "segoe ui semibold", opensans_semibold_italic;
+  font-weight: 300;
+  font-style: italic;
 }
-
-#mc-content .mc-openid-main {
-    position: absolute;
-    top: 2px;
-    right: 0;
+.top-question ul {
+  list-style: none;
+}
+.top-question ul li {
+  padding: 0.3em 0;
 }
