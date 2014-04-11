@@ -242,4 +242,32 @@ class PhoneParserTest extends PHPUnit_Framework_TestCase  {
     }
 
 
+    public function test_are_equal_phones_equal() {
+        $this->assertTrue(are_equal_phones("1234567", "1234567"));
+    }
+
+    public function test_are_equal_phones_equal_first_not_normalized() {
+        $this->assertTrue(are_equal_phones("+1(234) 56-7", "1234567"));
+    }
+
+    public function test_are_equal_phones_equal_both_not_normalized() {
+        $this->assertTrue(are_equal_phones("+1(234) 56-7", "(123) 45-67"));
+    }
+
+    public function test_are_equal_phones_city_code_absent() {
+        $this->assertTrue(are_equal_phones("8-812-1234567", "1234567"));
+    }
+
+    public function test_are_equal_phones_city_code_different() {
+        $this->assertFalse(are_equal_phones("8-812-1234567", "8-495-1234567"));
+    }
+
+    public function test_are_equal_phones_mobile_and_city() {
+        $this->assertFalse(are_equal_phones("8-921-1234567", "1234567"));
+    }
+
+    public function test_are_equal_phones_mobile() {
+        $this->assertTrue(are_equal_phones("8-921-1234567", "+7(921)1234567"));
+    }
+
 }

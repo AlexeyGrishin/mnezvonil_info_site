@@ -1,15 +1,18 @@
 <?php $class="found"; ?>
 <?php Templator::capture("body") ?>
 
-<pre>
+<!--pre>
 <?php e(print_r($grouped, true));?>
-</pre>
+</pre-->
 <?php
     $proofs = $pi->proofs();
     foreach ($proofs as $proof) {
         ?>
             <section class="result">
                 <h3>
+                    <?php if ($proof->city_name) { ?>
+                        <b>(<?php h($proof->city_name) ?>)</b>
+                    <?php } ?>
                     <a href="<?php h($proof->url)?>" target="_blank"><?php h($proof->url)?></a>
                 </h3>
                 <div>

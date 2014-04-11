@@ -24,12 +24,19 @@ class PhoneProofDB {
     public $post_text_id;
     public $text;
 
+    public $city_name;
+
     function init_description() {
         if ($this->description == null || strlen($this->description) == 0) {
             $this->description =  $this->text;
             //$this->description = "temo";//TODO: $this->text;
             //$this->text = "temp";
         }
+    }
+
+    function init_city_name(Cities $cities) {
+        if (is_cell($this->phone_id)) return;
+        $this->city_name = $cities->perCode(get_city_code($this->phone_id))->title;
     }
 
     function __toString() {

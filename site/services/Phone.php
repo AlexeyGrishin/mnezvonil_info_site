@@ -27,6 +27,19 @@ define("PHONE_REGEXP", "/(\\+?[378]?[- \\( ]?[0-9]{3}[- \\)]?[- 0-9]{4,12})[^0-9
 
 define("URL_REGEXP", "/https?:\\/\\/[^\\s]+/");
 
+
+function are_equal_phones($phone1, $phone2) {
+    $p1 = normalize_phone($phone1);
+    $p2 = normalize_phone($phone2);
+    if (is_local($p1) && is_full($p2) && !is_cell($p2)) {
+        $p1 = get_city_code($p2) . $p1;
+    }
+    if (is_local($p2) && is_full($p1) && !is_cell($p1)) {
+        $p2 = get_city_code($p1) . $p2;
+    }
+    return $p1 == $p2;
+}
+
 function find_phones($text) {
     $m = array();
     $text = preg_replace("/<[^>]+>/", "<>", $text);
@@ -37,19 +50,64 @@ function find_phones($text) {
     return array();
 }
 
+function highlight_phone_and_cut($text, $phone, $pad = 3, $sep = "<br />", $before = "<strong class='phone'>", $after = "</strong>") {
+    $lines = explode($sep, $text);
+    //print_r($lines);
+    if (count($lines) <= $pad*2+1) {
+        return highlight_phone($text, $phone, $before, $after);
+    }
+    $ln = 0;
+    $found_lines = array();
+    foreach ($lines as $line) {
+        $res = find_phone_in_text($line, $phone);
+        if ($res !== false) {
+            $lines[$ln] = str_replace($res, $before . $res . $after, $line);
+            $found_lines[] = $ln;
+        }
+        $ln++;
+    }
+
+    $output = array();
+    $to = -1;
+    foreach ($found_lines as $fline) {
+        $from = max(0, $fline - $pad);
+        $to = min($fline + $pad, count($lines));
+        if ($from != 0) $output[] = "<p class='separator'></p>";
+        for ($i = $from; $i < $to; $i++) {
+            $output[] = $lines[$i];
+        }
+    }
+    if ($to != count($lines)) $output[] = "<p class='separator'></p>";
+    return implode($sep, $output);
+
+}
+
 function highlight_phone($text, $phone, $before = "<strong class='phone'>", $after = "</strong>") {
+    $found_phone = find_phone_in_text($text, $phone);
+    if ($found_phone === false) return $text;
+    try {
+        return str_replace($found_phone, $before . $found_phone . $after, $text);
+    }
+    catch (Exception $e) {
+        //ignore
+    }
+    return $text;
+
+}
+
+function find_phone_in_text($text, $phone) {
     $phones = find_phones($text);
     foreach ($phones as $found_phone) {
         try {
-            if (normalize_phone($found_phone) == $phone) {
-                return str_replace($found_phone, $before . $found_phone . $after, $text);
+            if (are_equal_phones($found_phone, $phone)) {
+                return $found_phone;
             }
         }
         catch (Exception $e) {
             //ignore
         }
     }
-    return $text;
+    return false;
 }
 
 function has_phone($text, $phone) {

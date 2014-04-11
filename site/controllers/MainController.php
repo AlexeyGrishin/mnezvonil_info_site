@@ -98,14 +98,25 @@ class MainController extends Controller {
         return $ret;
     }
 
+    private function assignCities($pi, Cities $cities) {
+        $proofs = $pi->proofs();
+        foreach ($proofs as $proof) {
+            $proof->init_city_name($cities);
+        }
+
+    }
+
     function phone() {
         $pi = $this->db->findPhoneInfo(unsearch(urldecode($this->phone)));
         if ($pi) {
-            return $this->render("result", array("original" => urldecode($this->phone),
+            $cities = $this->db->getCities();
+            $this->assignCities($pi, $cities);
+            return $this->render("result", array(
+                "original" => urldecode($this->phone),
                 "pi" => $pi,
                 "result" => I18N::result(count($pi->proofs())),
                 "phone" => $this->render_phone($pi->id),
-                "grouped" => $this->distribute($pi, $this->db->getCities())
+                "grouped" => $this->distribute($pi, $cities)
             ), "layout");
         }
         else {

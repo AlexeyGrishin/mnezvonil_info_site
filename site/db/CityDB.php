@@ -4,6 +4,7 @@ class CityDB
 {
     public $phone_code;
     public $title;
+    public $unknown = false;
 }
 
 class Cities {
@@ -36,6 +37,7 @@ class Cities {
         $c = new CityDB();
         $c->phone_code = $code;
         $c->title = $code . '';
+        $c->unknown = true;
         return $c;
     }
 
