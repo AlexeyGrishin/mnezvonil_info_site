@@ -1,10 +1,8 @@
 <?php $class="found"; ?>
 <?php Templator::capture("body") ?>
 
-<!--pre>
-<?php e(print_r($grouped, true));?>
-</pre-->
 <?php
+    $single_group = count($grouped) == 1;
     foreach ($grouped as $group) {
         $infos = $group['info'];
         $has_info = count($infos);
@@ -12,20 +10,29 @@
         ?>
         <section class="result-group <?php e($klass) ?>">
             <h3>
+                <?php iff($group['scope'], "<span>" . $group['scope']. "</span>") ?>
+                <?php e($group['result']) ?>
+            </h3>
+            <!--
+            <?php if (!$single_group) { ?>
+            <h3>
                 <?php iff($group['code'], "<code>" . $group['code']. "</code>") ?>
                 <?php h($group['phone']) ?>
                 <?php iff($group['code'], "<span>" . $group['scope']. "</span>") ?>
             </h3>
+            <?php }?>
+            -->
             <?php
                 if ($has_info) {
                     foreach ($infos as $proof) {
                         ?>
                         <section class="single-result">
+                            <a class="source" href="<?php h($proof->url)?>" target="_blank">Ссылка на источник</a>
                             <h4><a href="<?php h($proof->url)?>" target="_blank">Черный список на сайте <?php h($proof->site_name) ?></a></h4>
                             <?php if (could_be_cut($proof->description)) { ?>
-                            <summary>
+                            <div class="summary">
                                 <?php e(highlight_phone_and_cut($proof->description, $proof->phone_id)) ?>
-                            </summary>
+                            </div>
                             <?php } ?>
                             <div class="full">
                                 <?php e(highlight_phone($proof->description, $proof->phone_id)) ?>

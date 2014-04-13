@@ -64,8 +64,9 @@ function highlight_phone_and_cut($text, $phone, $pad = 3, $sep = "<br />", $befo
     $found_lines = array();
     foreach ($lines as $line) {
         $res = find_phone_in_text($line, $phone);
+        $lines[$ln] = strip_tags($line, "a");
         if ($res !== false) {
-            $lines[$ln] = str_replace($res, $before . $res . $after, $line);
+            $lines[$ln] = str_replace($res, $before . $res . $after, $lines[$ln]);
             $found_lines[] = $ln;
         }
         $ln++;

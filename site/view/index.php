@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"><head>
     <title>Единый черный список для владельцев собак</title>
     <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+    <link rel="shortcut icon" href="/img/favicon.ico" />
     <link rel="stylesheet" href="css/fonts.css" type="text/css" media="all">
     <link rel="stylesheet" href="css/common.css" type="text/css" media="all">
     <link rel="stylesheet" href="css/main.css" type="text/css" media="all">

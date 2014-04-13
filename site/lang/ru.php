@@ -3,16 +3,19 @@
 class I18N {
 
     static function result($count) {
+        if ($count == 0) {
+            return "нет упоминаний";
+        }
         switch ($count % 10) {
             case 1:
-                return "Найдено $count упоминание";
+                return "найдено $count упоминание";
                 break;
             case 2:
             case 3:
             case 4:
-                return "Найдено $count упоминания";
+                return "найдено $count упоминания";
             default:
-                return "Найдено $count упоминаний";
+                return "найдено $count упоминаний";
         }
     }
 

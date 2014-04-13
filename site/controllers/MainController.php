@@ -48,7 +48,7 @@ class MainController extends Controller {
     function distribute($pi, Cities $cities) {
         $ret = array();
         if (is_cell($pi->id)) {
-            $ret[] = array("scope" => "mobile", "info" => $pi->proofs(), "phone" => $pi->id, "code" => false);
+            $ret[] = array("scope" => false, "info" => $pi->proofs(), "phone" => $pi->id, "code" => false);
         }
         else if (is_full($pi->id)) {
             $city_phone = get_local_phone($pi->id);
@@ -92,8 +92,8 @@ class MainController extends Controller {
                 }
             }
         }
-        foreach ($ret as $info) {
-            $info["result"] = I18N::result(count($info["info"]));
+        foreach ($ret as $key => $info) {
+            $ret[$key]["result"] = I18N::result(count($info["info"]));
         }
         return $ret;
     }

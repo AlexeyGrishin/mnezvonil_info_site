@@ -12,8 +12,6 @@ button {
 body {
   padding: 0 100px;
   margin: 0;
-}
-.main {
   margin-left: auto;
   margin-right: auto;
   min-width: 600px;

@@ -1,7 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,300&subset=cyrillic,latin);
 h1 {
   font-size: 16pt;
-  text-align: center;
+  text-align: left;
 }
 .full-list ul {
   list-style: none;
@@ -18,13 +18,17 @@ h1 {
   position: relative;
   cursor: pointer;
 }
+.result-group p.separator:hover:after {
+  color: #888;
+  font-size: 13pt;
+  content: 'Щелкните чтобы увидеть текст целиком';
+}
 .result-group p.separator:after {
   content: '. . .';
   font-size: 16pt;
-  text-align: center;
-  background: #eee;
+  text-align: left;
   display: block;
-  height: 1em;
+  height: 20px;
   line-height: 0.7em;
   margin-left: -1em;
 }
@@ -40,23 +44,25 @@ h1 {
 }
 .result-group .single-result > h4 a {
   color: black;
+  text-decoration: none;
 }
-.result-group .single-result > summary,
+.result-group .single-result > h4 a:hover {
+  text-decoration: underline;
+}
+.result-group .single-result > .summary,
 .result-group .single-result > .full {
   padding-left: 2em;
   font-size: 11pt;
   font-family: serif;
-  background-color: #eee;
 }
-.result-group .single-result > summary {
+.result-group .single-result > .summary {
   cursor: pointer;
-  border-top: 2px dashed #ccc;
-  border-bottom: 2px dashed #ccc;
+  border-left: 2px dashed #ccc;
 }
 .result-group .single-result > .full {
   padding: 0.5em 0 1em 2em;
 }
-.result-group .single-result summary + .full {
+.result-group .single-result .summary + .full {
   display: none;
 }
 .result-group .single-result .source {
@@ -70,12 +76,13 @@ h1 {
 }
 .result-group h3 {
   border-left: 5px solid #008000;
-  background-color: #d1efd1;
+  background-color: #ebf5eb;
   margin: 0;
   padding-left: 0.5em;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
-  font-size: 16pt;
+  font-size: 15pt;
+  font-weight: normal;
 }
 .result-group h3 > code {
   font-family: 'Open Sans';
@@ -99,18 +106,17 @@ h1 {
 }
 .result-group.bad h3 {
   border-left-color: #800000;
-  background-color: #efd1d1;
+  background-color: #f5e9e9;
 }
 .bottom {
   margin-top: 2em;
 }
 .find {
-  opacity: 0.5;
   transition: all 0.2s;
-  background: #F2F2F2;
+  background: #F8f8f8;
   padding: 1em;
   position: relative;
-  margin-bottom: 3em;
+  margin-bottom: 1em;
 }
 .find .home {
   border: 1px solid #374547;
@@ -121,8 +127,8 @@ h1 {
   background: #374547;
   text-decoration: none;
   transition: all 0.2s;
-  background-color: #888;
-  border-color: #888;
+  background-color: #cbcbcb;
+  border-color: #cbcbcb;
   width: 150px;
   float: left;
 }
@@ -156,8 +162,8 @@ h1 {
   background: #374547;
   text-decoration: none;
   transition: all 0.2s;
-  background-color: #888;
-  border-color: #888;
+  background-color: #cbcbcb;
+  border-color: #cbcbcb;
 }
 .find input[type=submit]:active {
   -webkit-transform: translate(1px, 0);
@@ -171,8 +177,4 @@ h1 {
   clear: both;
   content: ' ';
   display: block;
-}
-.find:hover,
-.find:focus {
-  opacity: 1;
 }

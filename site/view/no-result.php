@@ -3,7 +3,7 @@
 
 <section class="result-group good">
     <h3>
-        <?php h($phone) ?>
+        нет упоминаний
     </h3>
     <section class="single-result no-result">
          <div class="not-found">Упоминания не найдены</div>

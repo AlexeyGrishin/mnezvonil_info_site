@@ -1,14 +1,14 @@
 @import "consts";
 @import "fonts";
 
-@green_bg: rgb(209, 239, 209);
+@green_bg: rgb(235, 245, 235);
 @green_fg: rgb(0, 128, 0);
-@red_bg: rgb(239, 209, 209);
+@red_bg: rgb(245, 233, 233);
 @red_fg: rgb(128, 0, 0);
 
 h1 {
   font-size: @font_big ;
-  text-align: center;
+  text-align: left;
 }
 
 .full-list {
@@ -32,13 +32,17 @@ h1 {
     //border-bottom: 2px dashed #ccc;
     position: relative;
     cursor: pointer;
+    &:hover:after {
+      color: #888;
+      font-size: @font_normal;
+      content: 'Щелкните чтобы увидеть текст целиком';
+    }
     &:after {
       content: '. . .';
       font-size: @font_big;
-      text-align: center;
-      background: #eee;
+      text-align: left;
       display: block;
-      height: 1em;
+      height: 20px;
       line-height: 0.7em;
       margin-left: -1em;
 
@@ -56,28 +60,29 @@ h1 {
       margin-bottom: 0.5em;
       a {
         color: black;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
 
-    > summary, > .full {
+    > .summary, > .full {
       padding-left: 2em;
       font-size: @font_normal - 2pt;
       font-family: serif;
-      //
-      background-color: #eee;
     }
 
-    > summary {
+    > .summary {
       cursor: pointer;
-      border-top: 2px dashed #ccc;
-      border-bottom: 2px dashed #ccc;
+      border-left: 2px dashed #ccc;
     }
 
     > .full {
       padding: 0.5em 0 1em 2em;
     }
 
-    summary + .full {
+    .summary + .full {
       display: none;
     }
 
@@ -100,10 +105,10 @@ h1 {
     padding-left: 0.5em;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
-    font-size: @font_big;
+    font-size: @font_big - 1pt;
+    font-weight: normal;
 
     > code {
-      //font-size: @font_normal;
       .opensans_l();
       color: #444;
     }
@@ -135,18 +140,17 @@ h1 {
 }
 
 .find {
-  opacity: 0.5;
   .animated();
 
-  background: #F2F2F2;
+  background: #F8f8f8;
   padding: 1em;
   position: relative;
-  margin-bottom: 3em;
+  margin-bottom: 1em;
 
   .home {
     .action_button();
-    background-color: #888;
-    border-color: #888;
+    background-color: #cbcbcb;
+    border-color: #cbcbcb;
     width: 150px;
     float: left;
   }
@@ -167,8 +171,8 @@ h1 {
 
   input[type=submit] {
     .action_button();
-    background-color: #888;
-    border-color: #888;
+    background-color: #cbcbcb;
+    border-color: #cbcbcb;
   }
 
   &:after {
@@ -177,7 +181,4 @@ h1 {
     display: block;
   }
 
-  &:hover, &:focus {
-    opacity: 1;
-  }
 }
