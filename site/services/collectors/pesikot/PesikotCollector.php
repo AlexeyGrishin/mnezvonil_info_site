@@ -2,7 +2,7 @@
 
 class PesikotCollector extends ForumCollector {
 
-    private $topics = array("134476", "88213", "148275", "10530");
+    private $topics = array("134476", "88213", "148275");
     private $base_url = "http://pesikot.org/forum/index.php?showtopic=";
 
 
