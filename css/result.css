@@ -84,18 +84,11 @@ h1 {
   font-size: 15pt;
   font-weight: normal;
 }
-.result-group h3 > code {
-  font-family: 'Open Sans';
-  font-weight: 400;
-  font-style: normal;
-  color: #444;
-}
 .result-group h3 > span {
-  color: #444;
+  color: #008000;
+  font-weight: bold;
   float: left;
-  font-family: 'Open Sans';
-  font-weight: 400;
-  font-style: normal;
+  font-size: 16pt;
 }
 .result-group h3 > span:after {
   content: "‒";
@@ -108,6 +101,9 @@ h1 {
   border-left-color: #800000;
   background-color: #f5e9e9;
 }
+.result-group.bad h3 > span {
+  color: #800000;
+}
 .bottom {
   margin-top: 2em;
 }
@@ -116,7 +112,8 @@ h1 {
   background: #F8f8f8;
   padding: 1em;
   position: relative;
-  margin-bottom: 1em;
+  font-size: 12pt;
+  margin-bottom: 2em;
 }
 .find .home {
   border: 1px solid #374547;

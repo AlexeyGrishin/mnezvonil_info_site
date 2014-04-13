@@ -108,14 +108,12 @@ h1 {
     font-size: @font_big - 1pt;
     font-weight: normal;
 
-    > code {
-      .opensans_l();
-      color: #444;
-    }
     > span {
-      color: #444;
+      color: @green_fg;
+      font-weight: bold;
       float: left;
-      .opensans_l();
+      font-size: @font_big;
+      //.opensans_l();
       &:after {
         content: "‒";
         padding: 0 0.3em;
@@ -131,6 +129,9 @@ h1 {
     h3 {
       border-left-color: @red_fg;
       background-color: @red_bg;
+      > span {
+        color: @red_fg;
+      }
     }
   }
 }
@@ -145,7 +146,8 @@ h1 {
   background: #F8f8f8;
   padding: 1em;
   position: relative;
-  margin-bottom: 1em;
+  font-size: @font_normal - 1pt;
+  margin-bottom: 2em;
 
   .home {
     .action_button();
