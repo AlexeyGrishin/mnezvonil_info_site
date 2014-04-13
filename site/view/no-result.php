@@ -1,7 +1,17 @@
 <?php $class="not-found"; ?>
 <?php Templator::capture("body") ?>
 
-<!-- empty -->
+<section class="result-group good">
+    <h3>
+        <?php h($phone) ?>
+    </h3>
+    <section class="single-result no-result">
+         <div class="not-found">Упоминания не найдены</div>
+    </section>
+</section>
+<section class="bottom">
+    &nbsp;
+</section>
 
 <?php Templator::capture("questions") ?>
 

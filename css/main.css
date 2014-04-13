@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,300&subset=cyrillic,latin);
 .top {
   background: #F2F2F2;
   padding: 1em;
@@ -38,13 +39,13 @@
   right: 140px;
   top: 0;
   bottom: 0;
-  border: 1px solid #A6A6A6;
+  border: 1px solid #374547;
   background: white;
 }
 .top form .field > span {
   position: absolute;
   left: 3px;
-  top: 5px;
+  top: 6px;
   width: 32px;
   bottom: 0;
 }
@@ -61,31 +62,42 @@
 }
 .top form > input[type=submit] {
   position: absolute;
-  font-size: 16pt;
   right: 0;
   width: 141px;
   top: 0;
   bottom: 0;
-  border: 1px solid #A6A6A6;
+  font-size: 16pt;
+  border: 1px solid #374547;
   margin: 0;
+  padding: 1px 6px;
   color: white;
-  background-color: #000000;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#666666), to(#000000));
-  /* Saf4+, Chrome */
-
-  background-image: -webkit-linear-gradient(top, #666666, #000000);
-  /* Chrome 10+, Saf5.1+, iOS 5+ */
-
-  background-image: -moz-linear-gradient(top, #666666, #000000);
-  /* FF3.6 */
-
-  background-image: linear-gradient(to bottom, #666666, #000000);
+  cursor: pointer;
+  background: #374547;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.top form > input[type=submit]:active {
+  -webkit-transform: translate(1px, 0);
+  transform: translate(1px, 0);
+}
+.top form > input[type=submit]:hover {
+  background-color: #006680;
+  border-color: #006680;
+}
+.top form:hover .field,
+.top form:focus .field {
+  border-color: #006680;
+  box-shadow: inset 0 0 4px #00aedb;
+}
+.top form:hover > input[type=submit],
+.top form:focus > input[type=submit] {
+  background-color: #006680;
 }
 .top-question {
   text-align: right;
   font-size: 11pt;
-  font-family: "segoe ui semibold", opensans_semibold_italic;
-  font-weight: 300;
+  font-family: 'Open Sans';
+  font-weight: 600;
   font-style: italic;
 }
 .top-question ul {

@@ -50,6 +50,10 @@ function find_phones($text) {
     return array();
 }
 
+function could_be_cut($text, $pad = 3, $sep = "<br />") {
+    return count(explode($sep, $text)) > $pad*2+1;
+}
+
 function highlight_phone_and_cut($text, $phone, $pad = 3, $sep = "<br />", $before = "<strong class='phone'>", $after = "</strong>") {
     $lines = explode($sep, $text);
     //print_r($lines);
@@ -69,16 +73,22 @@ function highlight_phone_and_cut($text, $phone, $pad = 3, $sep = "<br />", $befo
 
     $output = array();
     $to = -1;
+    $add_first = false;
+    $first = true;
     foreach ($found_lines as $fline) {
         $from = max(0, $fline - $pad);
-        $to = min($fline + $pad, count($lines));
-        if ($from != 0) $output[] = "<p class='separator'></p>";
+        $to = min($fline + $pad + 1, count($lines));
+        if ($from != 0) $add_first = true;
+        if (!$first) $output[] = "<p class='separator'></p>";
         for ($i = $from; $i < $to; $i++) {
             $output[] = $lines[$i];
         }
+        $first = false;
     }
-    if ($to != count($lines)) $output[] = "<p class='separator'></p>";
-    return implode($sep, $output);
+    $out = implode($sep, $output);
+    if ($add_first) $out = "<p class='separator'></p>" . $out;
+    if ($to != count($lines)) $out = $out . "<p class='separator'></p>";
+    return $out;
 
 }
 

@@ -27,7 +27,7 @@
                 <span>+7</span>
                 <input name="phone" type="text" placeholder="-номер-телефона"/>
             </div>
-            <input type="submit" value="Найти">
+            <input type="submit" value="Искать">
         </form>
     </section>
     <section class="sites">

@@ -1,3 +1,37 @@
 @font_normal: 13pt;
 @font_small: 11pt;
 @font_big: 16pt;
+
+@color_passive: #374547;
+@color_active: #006680;
+@color_glow: #00aedb;
+
+.animated() {
+  transition: all 0.2s;
+}
+
+
+.action_button() {
+  border: 1px solid @color_passive;
+  margin: 0;
+  padding: 1px 6px;
+  color: white;
+  cursor: pointer;
+  background: @color_passive;
+  text-decoration: none;
+  .animated();
+
+  &:active {
+    -webkit-transform: translate(1px, 0);
+    transform: translate(1px, 0);
+  }
+
+  &:hover {
+    .action_button_hover();
+  }
+}
+
+.action_button_hover() {
+  background-color: @color_active;
+  border-color: @color_active;
+}

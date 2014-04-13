@@ -1,13 +1,15 @@
 @import "consts";
+@import "fonts";
 
 html {
-  font-family: "segoe ui", open_sansregular, sans-serif;
+  .opensans_r();
   font-size: @font_normal;
   color: black;
 }
 
 input, button {
-  font-family: "segoe ui", open_sansregular, sans-serif;
+  .opensans_r();
+  font-size: @font_normal;
 }
 
 body {
@@ -25,8 +27,8 @@ body {
 
 .question {
   h3 {
-    font-family: "segoe ui light", open_sanslight;
-    font-size: @font_big
+    .opensans_l();
+    font-size: @font_normal + 1pt;
   }
 
   div {

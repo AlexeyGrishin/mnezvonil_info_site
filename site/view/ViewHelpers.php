@@ -36,3 +36,9 @@ function e($value) {
 function m($mail) {
     echo "<a href='mailto:$mail'>$mail</a>";
 }
+
+function iff($condition, $html) {
+    if ($condition) {
+        echo $html;
+    }
+}

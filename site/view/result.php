@@ -5,23 +5,48 @@
 <?php e(print_r($grouped, true));?>
 </pre-->
 <?php
-    $proofs = $pi->proofs();
-    foreach ($proofs as $proof) {
+    foreach ($grouped as $group) {
+        $infos = $group['info'];
+        $has_info = count($infos);
+        $klass = $has_info ? 'bad' : 'good';
         ?>
-            <section class="result">
-                <h3>
-                    <?php if ($proof->city_name) { ?>
-                        <b>(<?php h($proof->city_name) ?>)</b>
-                    <?php } ?>
-                    <a href="<?php h($proof->url)?>" target="_blank"><?php h($proof->url)?></a>
-                </h3>
-                <div>
-                    <?php e(highlight_phone($proof->description, $proof->phone_id)) ?>
-                </div>
-            </section>
+        <section class="result-group <?php e($klass) ?>">
+            <h3>
+                <?php iff($group['code'], "<code>" . $group['code']. "</code>") ?>
+                <?php h($group['phone']) ?>
+                <?php iff($group['code'], "<span>" . $group['scope']. "</span>") ?>
+            </h3>
             <?php
+                if ($has_info) {
+                    foreach ($infos as $proof) {
+                        ?>
+                        <section class="single-result">
+                            <h4><a href="<?php h($proof->url)?>" target="_blank">Черный список на сайте <?php h($proof->site_name) ?></a></h4>
+                            <?php if (could_be_cut($proof->description)) { ?>
+                            <summary>
+                                <?php e(highlight_phone_and_cut($proof->description, $proof->phone_id)) ?>
+                            </summary>
+                            <?php } ?>
+                            <div class="full">
+                                <?php e(highlight_phone($proof->description, $proof->phone_id)) ?>
+                            </div>
+                        </section>
+                        <?php
+                    }
+                }
+            else {
+                ?>
+                <section class="single-result no-result">
+                    <div class="not-found">Упоминания не найдены</div>
+                </section>
+            <?php
+            }
+            ?>
+        </section>
+        <?php
     }
 ?>
+
 <section class="bottom">
     &nbsp;
 </section>

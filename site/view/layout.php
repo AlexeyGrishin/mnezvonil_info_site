@@ -15,16 +15,13 @@
         <form method="GET" action="<?php e(Site::index())?>search">
             <div class="field">
                 <span>+7</span>
-                <input name="phone" type="text" maxlength="20" />
+                <input name="phone" type="text" size="16" maxlength="20" value="<?php h($phone) ?>" />
             </div>
             <input type="submit" value="Проверить">
         </form>
     </section>
 
-    <section class="top <?php h($class)?>">
-        <h1><?php h($phone) ?></h1>
-        <h2><?php h($result) ?></h2>
-    </section>
+    <h1>Результаты поиска <q><?php h($phone) ?></q> по черным спискам</h1>
     <?php Templator::insert("body"); ?>
     <section class="questions">
 
@@ -32,7 +29,7 @@
     </section>
     <br class="clear"/>
     <footer>
-        2012 - 2013
+        2012 - 2014
     </footer>
 
 </body>

@@ -25,6 +25,7 @@ class PhoneProofDB {
     public $text;
 
     public $city_name;
+    public $site_name;
 
     function init_description() {
         if ($this->description == null || strlen($this->description) == 0) {

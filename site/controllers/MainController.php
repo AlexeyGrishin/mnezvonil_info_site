@@ -48,13 +48,13 @@ class MainController extends Controller {
     function distribute($pi, Cities $cities) {
         $ret = array();
         if (is_cell($pi->id)) {
-            $ret[] = array("scope" => "mobile", "info" => array($pi), "phone" => $pi->id);
+            $ret[] = array("scope" => "mobile", "info" => $pi->proofs(), "phone" => $pi->id, "code" => false);
         }
         else if (is_full($pi->id)) {
             $city_phone = get_local_phone($pi->id);
             $city_code = get_city_code($pi->id);
             $city = $cities->perCode($city_code);
-            $ret[] = array("scope" => $city->title, "info" => array($pi), "code" => $city_code, "phone" => $city_phone);
+            $ret[] = array("scope" => $city->title, "info" => $pi->proofs(), "code" => $city_code, "phone" => $city_phone);
         }
         else {
             $city_phone = get_local_phone($pi->id);
@@ -103,14 +103,27 @@ class MainController extends Controller {
         foreach ($proofs as $proof) {
             $proof->init_city_name($cities);
         }
+    }
 
+    private function assignSites($pi, $sites) {
+        $proofs = $pi->proofs();
+        foreach ($proofs as $proof) {
+            foreach ($sites as $site) {
+                if ($site->id == $proof->known_site_id) {
+                    $proof->site_name = $site->domain;
+                    break;
+                }
+            }
+        }
     }
 
     function phone() {
         $pi = $this->db->findPhoneInfo(unsearch(urldecode($this->phone)));
         if ($pi) {
             $cities = $this->db->getCities();
+            $sites = $this->db->getKnownSitesEvenInactive();
             $this->assignCities($pi, $cities);
+            $this->assignSites($pi, $sites);
             return $this->render("result", array(
                 "original" => urldecode($this->phone),
                 "pi" => $pi,

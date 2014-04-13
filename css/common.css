@@ -1,11 +1,13 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,300&subset=cyrillic,latin);
 html {
-  font-family: "segoe ui", open_sansregular, sans-serif;
+  font-family: 'Open Sans';
   font-size: 13pt;
   color: black;
 }
 input,
 button {
-  font-family: "segoe ui", open_sansregular, sans-serif;
+  font-family: 'Open Sans';
+  font-size: 13pt;
 }
 body {
   padding: 0 100px;
@@ -18,8 +20,10 @@ body {
   max-width: 1000px;
 }
 .question h3 {
-  font-family: "segoe ui light", open_sanslight;
-  font-size: 16pt;
+  font-family: 'Open Sans';
+  font-weight: 400;
+  font-style: normal;
+  font-size: 14pt;
 }
 .question div {
   padding-left: 4em;
