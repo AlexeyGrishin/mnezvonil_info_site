@@ -1,6 +1,6 @@
 <?php
 
-function normalize_phone($phone) {
+function normalize_phone($phone, $ignore_length = false) {
     $digit_phone = preg_replace("/[^0-9]/", "", $phone);
     if (strlen($digit_phone) == 11) {
         if ($digit_phone[0] == '8' || $digit_phone[0] == '7') {
@@ -8,7 +8,7 @@ function normalize_phone($phone) {
         }
     }
     //valid phone numbers - 7 digits, 10 digits
-    elseif (strlen($digit_phone) != 7 && strlen($digit_phone) != 10) {
+    elseif (strlen($digit_phone) != 7 && strlen($digit_phone) != 10 && !$ignore_length) {
         throw new Exception("Phone " . $digit_phone . "(" . $phone .") is not correct");
     }
     return $digit_phone;
@@ -155,7 +155,11 @@ function unsearch($phone) {
 }
 
 function is_cell($phone) {
-    return is_full($phone) ? $phone[0] == '9' : false;
+    return is_full($phone) && is_cell_code($phone);
+}
+
+function is_cell_code($code) {
+    return $code[0] == '9';
 }
 
 function get_city_code($phone) {

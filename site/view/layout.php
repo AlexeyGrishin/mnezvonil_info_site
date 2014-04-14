@@ -11,8 +11,6 @@
 </head>
 <body class="results">
     <section class="find">
-        <a href="<?php e(Site::index()) ?>" class="home">&lt;&lt; На главную</a>
-        <h1>Проверьте номер телефона в черном списке</h1>
         <form method="GET" action="<?php e(Site::index())?>search">
             <div class="field">
                 <span>+7</span>
@@ -22,7 +20,7 @@
         </form>
     </section>
 
-    <h1>Результаты поиска <q><?php h($phone) ?></q> по черным спискам</h1>
+    <h1><a href="<?php e(Site::index()) ?>" class="home" title="На главную">&nbsp;</a> Результаты поиска <q><?php h($phone) ?></q> по черным спискам</h1>
     <?php Templator::insert("body"); ?>
     <section class="questions">
 

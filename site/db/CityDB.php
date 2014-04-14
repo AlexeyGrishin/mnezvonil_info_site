@@ -34,10 +34,20 @@ class Cities {
     }
 
     private function unknown($code) {
+        if (is_cell_code($code)) {
+            return $this->mobile($code);
+        }
         $c = new CityDB();
         $c->phone_code = $code;
         $c->title = $code . '';
         $c->unknown = true;
+        return $c;
+    }
+
+    private function mobile($code) {
+        $c = new CityDB();
+        $c->phone_code = $code;
+        $c->title = I18N::mobile();
         return $c;
     }
 

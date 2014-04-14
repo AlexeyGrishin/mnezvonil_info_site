@@ -47,10 +47,10 @@ class MainController extends Controller {
 
     function distribute($pi, Cities $cities) {
         $ret = array();
-        if (is_cell($pi->id)) {
+        if (is_cell($pi->original_phone)) {
             $ret[] = array("scope" => false, "info" => $pi->proofs(), "phone" => $pi->id, "code" => false);
         }
-        else if (is_full($pi->id)) {
+        else if (is_full($pi->original_phone)) {
             $city_phone = get_local_phone($pi->id);
             $city_code = get_city_code($pi->id);
             $city = $cities->perCode($city_code);
@@ -120,6 +120,7 @@ class MainController extends Controller {
     function phone() {
         $pi = $this->db->findPhoneInfo(unsearch(urldecode($this->phone)));
         if ($pi) {
+            $pi->add_original_phone(urldecode($this->phone));
             $cities = $this->db->getCities();
             $sites = $this->db->getKnownSitesEvenInactive();
             $this->assignCities($pi, $cities);
@@ -128,7 +129,7 @@ class MainController extends Controller {
                 "original" => urldecode($this->phone),
                 "pi" => $pi,
                 "result" => I18N::result(count($pi->proofs())),
-                "phone" => $this->render_phone($pi->id),
+                "phone" => $this->render_phone($pi->original_phone),
                 "grouped" => $this->distribute($pi, $cities)
             ), "layout");
         }

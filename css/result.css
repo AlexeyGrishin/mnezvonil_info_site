@@ -2,6 +2,27 @@
 h1 {
   font-size: 16pt;
   text-align: left;
+  margin-top: 0;
+  height: 50px;
+  line-height: 50px;
+}
+h1 .home {
+  -webkit-transform: translate(1px, 0);
+  transform: translate(1px, 0);
+  opacity: 0.9;
+  background-image: url(/img/left_round.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 26px;
+  text-decoration: none;
+  vertical-align: middle;
+}
+h1 .home:hover {
+  opacity: 1;
+}
+h1 .home > img {
+  vertical-align: middle;
 }
 .full-list ul {
   list-style: none;
@@ -9,6 +30,9 @@ h1 {
 .full-list li {
   float: left;
   width: 7em;
+}
+.result-group {
+  clear: both;
 }
 .result-group strong.phone {
   background-color: #800000;
@@ -110,35 +134,18 @@ h1 {
 .find {
   transition: all 0.2s;
   background: #F8f8f8;
-  padding: 1em;
+  padding: 0em 1em;
+  height: 40px;
+  line-height: 40px;
   position: relative;
-  font-size: 12pt;
-  margin-bottom: 2em;
-}
-.find .home {
-  border: 1px solid #374547;
-  margin: 0;
-  padding: 1px 6px;
-  color: white;
-  cursor: pointer;
-  background: #374547;
-  text-decoration: none;
-  transition: all 0.2s;
-  background-color: #cbcbcb;
-  border-color: #cbcbcb;
-  width: 150px;
-  float: left;
-}
-.find .home:active {
-  -webkit-transform: translate(1px, 0);
-  transform: translate(1px, 0);
-}
-.find .home:hover {
-  background-color: #006680;
-  border-color: #006680;
+  margin-bottom: 0em;
+  font-size: 11pt;
 }
 .find form {
   float: right;
+}
+.find form input {
+  font-size: 11pt;
 }
 .find form .field,
 .find form input[type=submit] {
@@ -146,9 +153,10 @@ h1 {
 }
 .find form .field input {
   margin: 0;
+  border: 0;
 }
-.find h1 {
-  display: none;
+.find:hover {
+  top: 0;
 }
 .find input[type=submit] {
   border: 1px solid #374547;
@@ -159,8 +167,8 @@ h1 {
   background: #374547;
   text-decoration: none;
   transition: all 0.2s;
-  background-color: #cbcbcb;
-  border-color: #cbcbcb;
+  background-color: #d6d6d6;
+  border-color: #d6d6d6;
 }
 .find input[type=submit]:active {
   -webkit-transform: translate(1px, 0);

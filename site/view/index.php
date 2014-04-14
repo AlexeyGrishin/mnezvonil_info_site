@@ -104,7 +104,7 @@
             <pre>&lt;script src="http://mnezvonil.info/js/iframe.js">&lt;/script></pre>
             Результат будет выглядеть примерно вот так:
             <div class="example">
-                <!--script src="http://mnezvonil.info/js/iframe.js"></script-->
+                <script src="http://mnezvonil.info/js/iframe.js"></script>
             </div>
 
         </div>

@@ -168,7 +168,7 @@ class BlacklistDB {
 
     /**
      * @param $phones array of phones variations
-     * @returns array of PhoneInfoDB
+     * @returns PhoneInfoDB
      */
     function findPhoneInfo($phones, $all = false) {
         $resultPhoneInfo = false;

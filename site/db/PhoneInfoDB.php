@@ -8,8 +8,14 @@ class PhoneInfoDB {
     public $reviewed;
     public $proof_of_good;
     public $victims_count;
+    public $original_phone;
+
     private $_proofs = array();
     private $_aliases = array();
+
+    public function add_original_phone($phone) {
+        $this->original_phone = normalize_phone($phone, true);
+    }
 
     public function add_proof($proof) {
         $this->_proofs[] = $proof;

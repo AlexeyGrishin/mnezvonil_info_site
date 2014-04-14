@@ -22,13 +22,17 @@
   .animated();
 
   &:active {
-    -webkit-transform: translate(1px, 0);
-    transform: translate(1px, 0);
+    .action_button_active();
   }
 
   &:hover {
     .action_button_hover();
   }
+}
+
+.action_button_active() {
+  -webkit-transform: translate(1px, 0);
+  transform: translate(1px, 0);
 }
 
 .action_button_hover() {

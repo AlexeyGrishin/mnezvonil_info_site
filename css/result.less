@@ -9,6 +9,27 @@
 h1 {
   font-size: @font_big ;
   text-align: left;
+  margin-top: 0;
+  height: 50px;
+  line-height: 50px;
+
+  .home {
+    .action_button_active();
+    opacity: 0.9;
+    background-image: url(/img/left_round.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 26px;
+    text-decoration: none;
+    vertical-align: middle;
+    &:hover {
+      opacity: 1;
+    }
+    > img {
+      vertical-align: middle;
+    }
+  }
 }
 
 .full-list {
@@ -22,7 +43,7 @@ h1 {
 }
 
 .result-group {
-
+  clear: both;
   strong.phone {
     background-color: @red_fg;
     color: white;
@@ -144,37 +165,35 @@ h1 {
   .animated();
 
   background: #F8f8f8;
-  padding: 1em;
+  padding: 0em 1em;
+  height: 40px;
+  line-height: 40px;
   position: relative;
-  font-size: @font_normal - 1pt;
-  margin-bottom: 2em;
-
-  .home {
-    .action_button();
-    background-color: #cbcbcb;
-    border-color: #cbcbcb;
-    width: 150px;
-    float: left;
-  }
+  margin-bottom: 0em;
+  font-size: @font_small;
 
   form {
     float: right;
+    input {
+      font-size: @font_small;
+    }
     .field, input[type=submit] {
       display: inline-block;
     }
     .field input {
       margin: 0;
+      border:0;
     }
   }
 
-  h1 {
-    display: none;
+  &:hover {
+    top: 0;
   }
 
   input[type=submit] {
     .action_button();
-    background-color: #cbcbcb;
-    border-color: #cbcbcb;
+    background-color: #d6d6d6;
+    border-color: #d6d6d6;
   }
 
   &:after {

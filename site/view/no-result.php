@@ -6,7 +6,7 @@
         нет упоминаний
     </h3>
     <section class="single-result no-result">
-         <div class="not-found">Упоминания не найдены</div>
+         <div class="not-found">Упоминаний на известных нам сайтах не обнаружено</div>
     </section>
 </section>
 <section class="bottom">

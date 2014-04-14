@@ -6,6 +6,9 @@ class I18N {
         if ($count == 0) {
             return "нет упоминаний";
         }
+        if ($count >= 10 && $count <= 20) {
+            return "найдено $count упоминаний";
+        }
         switch ($count % 10) {
             case 1:
                 return "найдено $count упоминание";
@@ -17,6 +20,10 @@ class I18N {
             default:
                 return "найдено $count упоминаний";
         }
+    }
+
+    static function mobile() {
+        return "Мобильные телефоны";
     }
 
     static function no_result() {
