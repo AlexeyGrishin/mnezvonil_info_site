@@ -27,7 +27,6 @@
                     foreach ($infos as $proof) {
                         ?>
                         <section class="single-result">
-                            <a class="source" href="<?php h($proof->url)?>" target="_blank">Ссылка на источник</a>
                             <h4><a href="<?php h($proof->url)?>" target="_blank">Черный список на сайте <?php h($proof->site_name) ?></a></h4>
                             <?php if (could_be_cut($proof->description)) { ?>
                             <div class="summary">
@@ -37,6 +36,7 @@
                             <div class="full">
                                 <?php e(highlight_phone($proof->description, $proof->phone_id)) ?>
                             </div>
+                            <span class="source"><a  href="<?php h($proof->url)?>" target="_blank">Ссылка на источник</a></span>
                         </section>
                         <?php
                     }

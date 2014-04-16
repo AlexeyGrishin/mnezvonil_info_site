@@ -41,6 +41,7 @@ h1 .home > img {
 .result-group p.separator {
   position: relative;
   cursor: pointer;
+  margin-bottom: 0;
 }
 .result-group p.separator:hover:after {
   color: #888;
@@ -67,8 +68,9 @@ h1 .home > img {
   margin-bottom: 0.5em;
 }
 .result-group .single-result > h4 a {
-  color: black;
+  color: #444;
   text-decoration: none;
+  font-weight: normal;
 }
 .result-group .single-result > h4 a:hover {
   text-decoration: underline;
@@ -78,20 +80,24 @@ h1 .home > img {
   padding-left: 2em;
   font-size: 11pt;
   font-family: serif;
+  clear: both;
 }
 .result-group .single-result > .summary {
   cursor: pointer;
   border-left: 2px dashed #ccc;
 }
 .result-group .single-result > .full {
-  padding: 0.5em 0 1em 2em;
+  padding: 0.5em 0 0em 2em;
 }
 .result-group .single-result .summary + .full {
   display: none;
 }
 .result-group .single-result .source {
+  font-family: 'Open Sans';
+  font-weight: 600;
+  font-style: italic;
   float: right;
-  font-size: 11pt;
+  font-size: 10pt;
 }
 .result-group .single-result:after {
   content: ' ';
