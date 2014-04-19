@@ -13,15 +13,6 @@
                 <?php iff($group['scope'], "<span>" . $group['scope']. "</span>") ?>
                 <?php e($group['result']) ?>
             </h3>
-            <!--
-            <?php if (!$single_group) { ?>
-            <h3>
-                <?php iff($group['code'], "<code>" . $group['code']. "</code>") ?>
-                <?php h($group['phone']) ?>
-                <?php iff($group['code'], "<span>" . $group['scope']. "</span>") ?>
-            </h3>
-            <?php }?>
-            -->
             <?php
                 if ($has_info) {
                     foreach ($infos as $proof) {

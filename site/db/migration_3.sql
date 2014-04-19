@@ -14,4 +14,4 @@ alter table `known_sites`
 add constraint `fk_city` foreign key (`default_city_id`) references `cities`(`phone_code`) on delete set null on update set null;
 
 update `known_sites` set `default_city_id` = 812 where `domain` = 'hvosty.ru' or domain = 'vsehvosty.ru' or domain = 'poteryashka.spb.ru';
-update `known_sites` set `default_city_id` = 495 where `domain` = 'pesikot.org';
+update `known_sites` set `default_city_id` = 495 where `domain` = 'pesikot.org' or domain = 'husky.forum.ru';

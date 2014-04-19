@@ -3,8 +3,8 @@
     <title><?php e($phone)?> - единый черный список для владельцев собак</title>
 	<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
     <link rel="shortcut icon" href="/img/favicon.ico" />
-	<link rel="stylesheet" href="../css/common.css" type="text/css" media="all">
-	<link rel="stylesheet" href="../css/result.css" type="text/css" media="all">
+	<link rel="stylesheet" href="../css/common.css?1" type="text/css" media="all">
+	<link rel="stylesheet" href="../css/result.css?1" type="text/css" media="all">
 	<script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
     <?php include "ga.php"?>
