@@ -61,7 +61,7 @@ class CollectorStarter {
         }
 
         foreach ($known_sites as $site) {
-            $proofs_to_check = $this->db->getProofsToCheck($site->id, $site->update_period_hours);
+            $proofs_to_check = $this->db->getProofsToCheck($site->id, 24);
             $grouped = group_by_url($proofs_to_check);
             foreach ($grouped as $url => $proofs) {
                 try {
