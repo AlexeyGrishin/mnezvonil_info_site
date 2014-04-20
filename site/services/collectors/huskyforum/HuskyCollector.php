@@ -33,9 +33,16 @@ class HuskyCollector extends  Collector {
         }
     }
 
-    function check_link($url, $phone) {
-        //TODO
-    }
 
+    function get_texts_to_check($url) {
+        $doc = phpQuery::newDocumentFileHTML($url);
+        $posts = $this->helper->get_posts($doc);
+        $texts = array();
+        foreach ($posts as $post) {
+            $html = iconv("windows-1251", "utf-8", pq($post)->html());
+            $texts[] = $html;
+        }
+        return $texts;
+    }
 }
 

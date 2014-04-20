@@ -23,7 +23,7 @@ function normalize_phone_or_false($phone) {
     }
 }
 
-define("PHONE_REGEXP", "/(\\+?[378]?[- \\( ]?[0-9]{3}[- \\)]?[- 0-9]{4,12})[^0-9]/");
+define("PHONE_REGEXP", "/(\\+?[378]?[- \\( \\\\\\/=]?[0-9]{3}[- \\)\\\\\\/=]?[-= 0-9]{4,12})[^0-9]/");
 
 define("URL_REGEXP", "/https?:\\/\\/[^\\s]+/");
 
@@ -42,6 +42,7 @@ function are_equal_phones($phone1, $phone2) {
 
 function find_phones($text) {
     $m = array();
+    $text = preg_replace("/<br[^>]*>/i", "<> ", $text);
     $text = preg_replace("/<[^>]+>/", "<>", $text);
     $text = preg_replace(URL_REGEXP, "", $text);
     if (preg_match_all(PHONE_REGEXP, $text." ", $m)) {
@@ -121,20 +122,28 @@ function find_phone_in_text($text, $phone) {
     return false;
 }
 
-function has_phone($text, $phone) {
-    $nphone = normalize_phone($phone);
+function find_phones_in_text($text, $phones_array) {
     $phones = find_phones($text);
-    foreach ($phones as $phone) {
-        try {
-            if (normalize_phone($phone) == $nphone)
-                return true;
-        }
-        catch (Exception $e) {
-            //ignore
+    //print_r($text);
+    //print_r( $phones);
+    $found = array();
+    foreach ($phones_array as $phone_to_find) {
+        foreach ($phones as $phone_existent) {
+            try {
+                if (are_equal_phones($phone_existent, $phone_to_find)) {
+                    $found[] = $phone_to_find;
+                    $done = true;
+                    break;
+                }
+            }
+            catch (Exception $e) {
+                //ignore
+            }
         }
     }
-    return false;
+    return $found;
 }
+
 
 //returns array of possible DB keys in priority order
 function unsearch($phone) {

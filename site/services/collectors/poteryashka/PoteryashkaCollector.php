@@ -40,10 +40,5 @@ class PoteryashkaCollector extends ForumCollector {
 
     }
 
-    function check_link($url, $phone) {
-        // TODO: Implement check_link() method.
-    }
-
-
 
 }

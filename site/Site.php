@@ -55,6 +55,7 @@ class Site {
     static function login() {return Site::$base."admin-k/login/";}
     static $admin_index = "admin-k";
     static $admin_phones = "phones/";
+    static $admin_disappeared_phones = "phones_disappeared/";
     static function phone($nr) { return Site::$base."$nr/"; }
     static function logs($site_id) { return "logs/$site_id";}
     static $list = "list";
@@ -93,6 +94,7 @@ $r->add_route("list")->to(MAIN, "full_list");
 $r->add_route("admin-k/login/", array("GET"))->to(ADMIN, "login");
 $r->add_route("admin-k/login/", array("POST"))->to(ADMIN, "doLogin");
 $r->add_route("admin-k/logout")->to(ADMIN, "logout");
+$r->add_route("admin-k/phones_disappeared")->to(ADMIN, "phones_disappeared");
 $r->add_route("admin-k/phones/:site_id")->to(ADMIN, "phones");
 $r->add_route("admin-k/phones")->to(ADMIN, "phones");
 $r->add_route("admin-k/index")->to(ADMIN);
@@ -110,6 +112,8 @@ $a->add_route("check")->to(MAIN, "ajax_check");
 $a->add_route("admin-k/approve/post")->to(ADMIN, "ajax_approve_post");
 $a->add_route("admin-k/approve/proof")->to(ADMIN, "ajax_approve_proof");
 $a->add_route("admin-k/reject/proof")->to(ADMIN, "ajax_reject_proof");
+$a->add_route("admin-k/exists/proof")->to(ADMIN, "ajax_exists_proof");
+$a->add_route("admin-k/change_url/proof")->to(ADMIN, "ajax_change_url_proof");
 $a->add_route("admin-k/approve/:phone")->to(ADMIN, "ajax_approve");
 $a->add_route("admin-k/delete-without-proofs")->to(ADMIN, "delete_without_proofs");
 

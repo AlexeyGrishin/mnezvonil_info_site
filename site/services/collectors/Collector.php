@@ -44,11 +44,25 @@ abstract class Collector {
 
     abstract function do_collect(CollectorFW $fw);
 
-    abstract function check_link($url, $phone);
+    function check_link($url, $phones_to_find) {
+        $htmls = $this->get_texts_to_check($url);
+        $found = array();
+        $not_found = $phones_to_find;
+        foreach ($htmls as $html) {
+            $f = find_phones_in_text($html, $phones_to_find);
+            $found = array_merge($found, $f);
+        }
+        $not_found = array_diff($phones_to_find, $found);
+        return array($found, $not_found);
+    }
+
+    abstract function get_texts_to_check($url);
 
     protected function find_phones($text) {
         return find_phones($text);
     }
+
+
 
     protected function process_post($html, $url, $post_id, CollectorFW $fw, KLogger $logger, &$phones_info, PhoneEnsurer $ensurer = null) {
         if ($ensurer == null) $ensurer = NoSure::$INSTANCE;
@@ -122,5 +136,16 @@ abstract class ForumCollector extends Collector {
             $this->process_forum_page(pq($next[0])->attr("href"), $fw);
         }
     }
+
+    function get_texts_to_check($url) {
+        $doc = phpQuery::newDocumentFileHTML($url);
+        $posts = $doc[$this->get_post_selector()];
+        $texts = array();
+        foreach ($posts as $post) {
+            $texts[] = pq($post)->html();
+        }
+        return $texts;
+    }
+
 
 };

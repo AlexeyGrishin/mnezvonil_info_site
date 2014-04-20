@@ -69,17 +69,16 @@ class HvostyCollector extends  Collector {
         }
     }
 
-    function check_link($url, $phone_to_find) {
+
+
+    function get_texts_to_check($url) {
         $doc = phpQuery::newDocumentFileHTML($url);
-        $htmls = $this->helper->get_posts_htmls($doc, true);
-        foreach ($htmls as $html) {
-            if (has_phone($html, $phone_to_find)) return true;
-        }
-        return false;
+        return $this->helper->get_posts_htmls($doc, true);
     }
 
 
 }
+
 
 class PostCollector extends  Collector {
     private $url, $logger;
@@ -123,9 +122,11 @@ class PostCollector extends  Collector {
         }
     }
 
-    function check_link($url, $phone_to_find) {
-    }
 
+    function get_texts_to_check($url)
+    {
+        // TODO: Implement get_texts_to_check() method.
+    }
 }
 
 class InCollection implements PhoneEnsurer {

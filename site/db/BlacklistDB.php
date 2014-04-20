@@ -23,6 +23,9 @@ class BlacklistDB {
         $this->helper = new DBHelper($this->mysql);
     }
 
+    /**
+     * @return KnownSiteDB[]
+     */
     function getKnownSites() {
         $res = $this->mysql->query("select * from known_sites where active = 1");
         $res->setFetchMode(PDO::FETCH_CLASS, 'KnownSiteDB');
@@ -46,8 +49,13 @@ class BlacklistDB {
         $ps->execute(array(":id" => $id));
     }
 
+    /***
+     * @param $site_id
+     * @param $period
+     * @return PhoneProofDB[]
+     */
     function getProofsToCheck($site_id, $period) {
-        $ps = $this->mysql->prepare("SELECT * FROM phone_proofs WHERE known_site_id = :site_id AND removed = 0 AND TIMESTAMPDIFF(HOUR, last_update, CURRENT_TIMESTAMP) >= :period_in_h");
+        $ps = $this->mysql->prepare("SELECT * FROM phone_proofs WHERE known_site_id = :site_id AND removed = 0 AND proof_disappeared = 0 AND TIMESTAMPDIFF(HOUR, last_update, CURRENT_TIMESTAMP) >= :period_in_h ");
         $ps->execute(array(":site_id" => $site_id, ":period_in_h" => $period));
         $ps->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'PhoneProofDB');
         $resArray = array();
@@ -66,12 +74,36 @@ class BlacklistDB {
     }
 
     function markProofAsJustCollected($proof_id) {
-        $ps = $this->mysql->prepare("UPDATE phone_proofs SET last_update=CURRENT_TIMESTAMP, removed=0 where id = :id");
+        $ps = $this->mysql->prepare("UPDATE phone_proofs SET last_update=CURRENT_TIMESTAMP, removed=0, proof_disappeared=0 where id = :id");
         $ps->execute(array(":id" => $proof_id));
+    }
+
+    function getDisappearedProofsCount() {
+        return $this->helper->get_count("phones p", "marked_as_good != 1 and exists (select id from phone_proofs pp where pp.phone_id = p.id and pp.removed = 0 and pp.proof_disappeared = 1)");
+    }
+
+    function listDisappearedProofs() {
+        $phones = $this->helper->get_list("phones p", "id", "marked_as_good != 1 and exists (select id from phone_proofs pp where pp.phone_id = p.id and pp.removed = 0 and pp.proof_disappeared = 1)");
+        return $this->listPhonesWithProofs($phones);
     }
 
     function markProofAsDeleted($proof_id) {
         $ps = $this->mysql->prepare("UPDATE phone_proofs SET removed=1 where id = :id");
+        $ps->execute(array(":id" => $proof_id));
+    }
+
+    function markProofAsDisappeared($proof_id) {
+        $ps = $this->mysql->prepare("UPDATE phone_proofs SET proof_disappeared=1 where id = :id");
+        $ps->execute(array(":id" => $proof_id));
+    }
+
+    function changeProofUrl($proof_id, $url) {
+        $ps = $this->mysql->prepare("UPDATE phone_proofs SET url=:url WHERE id=:id");
+        $ps->execute(array(":id" => $proof_id, "url" => $url));
+    }
+
+    function markProofAsNotDisappeared($proof_id) {
+        $ps = $this->mysql->prepare("UPDATE phone_proofs SET proof_disappeared=0 where id = :id");
         $ps->execute(array(":id" => $proof_id));
     }
 
@@ -240,7 +272,11 @@ class BlacklistDB {
             $site_cond = " and known_site_id = :site_id ";
             $args["site_id"] = $site_id;
         }
-        $phones = $this->helper->get_list("phones p", "id", "reviewed = 0 and exists (select id from phone_proofs pp where pp.phone_id = p.id and pp.removed = 0 $site_cond) ORDER BY p.id DESC LIMIT $count", $args);
+        $phones = $this->helper->get_list("phones p", "id", "reviewed = 0 and exists (select id from phone_proofs pp where pp.phone_id = p.id and pp.removed = 0 $site_cond) ORDER BY p.created DESC LIMIT $count", $args);
+        return $this->listPhonesWithProofs($phones);
+    }
+
+    private function listPhonesWithProofs($phones) {
         $proofs_per_phone = array();
         if (count($phones) > 0) {
             $proofs = $this->helper->get_list_objects("phone_proofs", "PhoneProofDB", "phone_id in (" . join(", ", $phones) . ") and removed = 0");

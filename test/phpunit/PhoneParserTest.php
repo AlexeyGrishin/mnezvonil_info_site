@@ -209,6 +209,30 @@ class PhoneParserTest extends PHPUnit_Framework_TestCase  {
         );
     }
 
+    public function test_punctuation() {
+        $this->assert_phones(
+            array("9111234567", "9032281043"),
+            "8-911=1234567 !!!!!!!!!  8/903/2281043"
+        );
+    }
+
+    public function test_hvosty_case1() {
+        $this->assert_phones(array("9214098771"),
+            'Анюта Азаренко (Рублева) <br><!-- m --><a class="postlink" rel="nofollow" target="_blank" href="http://vkontakte.ru/id2260093" onclick="window.open(this.href);return false;">http://vkontakte.ru/id2260093</a><!-- m --><br>8-921-409-87-71 <br>Ищет кошку для утех своему британскому коту "на совсем или на вязку", британку или русскую голубую.<br>Очередная малолетняя разведенка, блин... <img src="./images/smilies/yucky.gif" alt=":sick:" title="">'
+        );
+    }
+
+    public function test_hc1() {
+        $this->assert_phones(array("9214098771"),
+            'http://vkontakte.ru/id2260093</a><br>8-921-409-87-71');
+    }
+
+    public function test_hc2() {
+        $this->assert_phones(array("9214098771"),
+            'http://vkontakte.ru/id2260093</a><BR />8-921-409-87-71');
+    }
+
+
     public function test_is_cell() {
         $this->assertTrue(is_cell("9217775566"));
     }

@@ -82,6 +82,17 @@ div.proof * {
     line-height: 20pt;
 }
 
+.proof-link.disappeared {
+    background-color: #ffe8e8;
+}
+
+.proof-link.disappeared:before {
+    content: "Больше не упоминается";
+    background: #880000;
+    color: white;
+    text-decoration: none;
+}
+
 .proof-link button {
     float: right;
     font-size: 9pt;

@@ -23,6 +23,14 @@ var Site = {
         return "../reject/proof?proof=" + proof;
     },
 
+    exists: function(proof) {
+        return "../exists/proof?proof=" + proof;
+    },
+
+    change_url: function(proof, url) {
+        return "../change_url/proof?proof=" + proof + "&url=" + url;
+    },
+
     restore: function(proof) {
         return "../approve/proof?proof=" + proof;
     },
@@ -75,6 +83,17 @@ $(function() {
             doActionProof(Site.remove($proof));
             return false;
         });
+        $(".exists", $this).click(function() {
+          doActionProof(Site.exists($proof));
+          return false;
+        });
+        $(".change_url", $this).click(function() {
+          var newUrl = prompt("Введите новый URL", $post);
+          if (newUrl)
+            doActionProof(Site.change_url($proof, encodeURIComponent(newUrl)));
+          return false;
+        });
+
 
     });
     $(".buttons").each(function() {

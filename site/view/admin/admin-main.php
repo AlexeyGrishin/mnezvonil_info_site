@@ -31,6 +31,11 @@
         </span>
     </div>
     <?php } ?>
+    <?php if ($disappeared_proofs > 0) {?>
+    <div>
+        <a href="<?php e(Site::$admin_disappeared_phones);?>">Телефоны, более не упомянутые в постах - <?php e($disappeared_proofs) ?></a>
+    </div>
+    <?php } ?>
     <div>
         <form method="GET" action="phone/">
             По номеру: <input name="phone"> <input type="submit"/>

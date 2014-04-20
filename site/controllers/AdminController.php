@@ -12,7 +12,7 @@ class AdminController extends Controller{
      * @var Auth @auth;
      */
     public $auth;
-    public $name, $password, $post, $phone, $proof, $site_id, $resolution, $proof_of_good;
+    public $name, $password, $post, $phone, $proof, $url, $site_id, $resolution, $proof_of_good;
 
 
     function login() {
@@ -83,6 +83,7 @@ class AdminController extends Controller{
             array(
                 "phones_count" => $this->db->getNonReviewedPhonesCount(),
                 "phones_without_proofs" => $this->db->getPhonesCountWithoutProofs(),
+                "disappeared_proofs" => $this->db->getDisappearedProofsCount(),
                 "logs" => $logs,
                 "sites" => $sites
             ));
@@ -91,6 +92,11 @@ class AdminController extends Controller{
     function delete_without_proofs() {
         $this->db->removePhonesWithoutProofs();
         return 1;
+    }
+
+    function phones_disappeared() {
+        $disappeared_proofs = $this->db->listDisappearedProofs();
+        return $this->render("admin/admin-phones", array("phones" => $disappeared_proofs, "has_more" => false));
     }
 
     function phones() {
@@ -149,6 +155,17 @@ class AdminController extends Controller{
 
     function ajax_approve_proof() {
         $this->db->markProofAs($this->proof, 0);
+        return 1;
+    }
+
+    function ajax_change_url_proof() {
+        $this->db->changeProofUrl($this->proof, urldecode($this->url));
+        $this->db->markProofAsNotDisappeared($this->proof);
+        return 1;
+    }
+
+    function ajax_exists_proof() {
+        $this->db->markProofAsNotDisappeared($this->proof);
         return 1;
     }
 

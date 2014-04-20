@@ -6,7 +6,7 @@ class MailDB {
     public static function create($subject, $text) {
         $m = new MailDB();
         $m->subject = $subject;
-        $m->text - $text;
+        $m->text = $text;
     }
 
 }

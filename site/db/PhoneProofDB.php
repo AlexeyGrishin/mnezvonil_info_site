@@ -23,6 +23,7 @@ class PhoneProofDB {
     public $removed;
     public $post_text_id;
     public $text;
+    public $proof_disappeared;
 
     public $city_name;
     public $site_name;
@@ -30,8 +31,6 @@ class PhoneProofDB {
     function init_description() {
         if ($this->description == null || strlen($this->description) == 0) {
             $this->description =  $this->text;
-            //$this->description = "temo";//TODO: $this->text;
-            //$this->text = "temp";
         }
     }
 
@@ -42,6 +41,10 @@ class PhoneProofDB {
 
     function __toString() {
         return "[" . $this->phone_id . "] " . $this->url . " ";
+    }
+
+    function normalized_url() {
+        return explode('#', $this->url)[0];
     }
 
 }

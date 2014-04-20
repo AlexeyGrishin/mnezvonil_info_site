@@ -57,17 +57,27 @@ function phone_control($phone, $proofs, $class = "") {
         <?php
 }
 
+/**
+ * @param $proof PhoneProofDB
+ */
 function phone_proof($proof) {
     ?>
-        <a class="proof-link" href="<?php e($proof->url)?>" id="<?php e($proof->id);?>">
+        <a class="proof-link <?php e($proof->proof_disappeared ? 'disappeared' : '') ?>" href="<?php e($proof->url)?>" id="<?php e($proof->id);?>">
             <span class="buttons">
             <?php e($proof->url)?>
-            <button class="approve-all">Подтвердить все телефоны</button>
+
+            <?php if (!$proof->proof_disappeared) { ?>
+                <button class="approve-all">Подтвердить все телефоны</button>
+            <?php } ?>
             <?php if (!$proof->removed) {?>
-            <button class="remove">Удалить</button>
-                <?php } else { ?>
-            <button class="restore">Восстановить</button>
-                <?php } ?>
+                <button class="remove">Удалить</button>
+            <?php } else { ?>
+                <button class="restore">Восстановить</button>
+            <?php } ?>
+            <?php if ($proof->proof_disappeared) { ?>
+                <button class="exists">Все еще <br/>упоминается</button>
+                <button class="change_url">Сменить URL</button>
+            <?php } ?>
             </span>
         </a>
         <div class="proof">
